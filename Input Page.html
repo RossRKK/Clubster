@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+
+<title>Add an event for Ross Kelso's and Nimrod Libman's wonderous school calender</title>
+<script language="JavaScript">
+
+function testResults (form) {
+    var title = form.title.value;
+	var start= form.start.value;
+	var end = form.end.value;
+	var dayz= new Array();
+	dayz.push(form.mon.checked);
+	dayz.push(form.tue.checked);
+	dayz.push(form.wed.checked);
+	dayz.push(form.thur.checked);
+	dayz.push(form.fri.checked);
+	dayz.push(form.sat.checked);
+	dayz.push(form.sun.checked);
+	
+	for (Count = 0; Count < 3; Count++) {
+        if (form.recur[Count].checked){
+				var days=form.recur[Count].value;
+			}
+    }
+	var content=  "<activity>\n\t<name>"+title+"</name>\n\t<time_strt>"+start+"</time_strt>\n\t<time_end>"+end+"</time_end>\n\t<mon>"+dayz[0]+"</mon>\n\t<tue>"+dayz[1]+"</tue>\n\t<wed>"+dayz[2]+"</wed>\n\t<thur>"+dayz[3]+"</thur>\n\t<fri>"+dayz[4]+"</fri>\n\t<sat>"+dayz[5]+"</sat>\n\t<sun>"+dayz[6]+"</sun>\n\t<recursion>"+days+"</recursion>\n</activity>";
+	
+	
+	alert (content);
+	var filename = title
+    var dlg = false;
+    with(document){
+     ir=createElement('iframe');
+     ir.id='ifr';
+     ir.location='about.blank';
+     ir.style.display='none';
+     body.appendChild(ir);
+      with(getElementById('ifr').contentWindow.document){
+           open("text/plain", "replace");
+           
+		   open();
+		   charset = "utf-8";
+           write(content);
+           
+           document.charset = "utf-8";
+           dlg = execCommand('SaveAs', false, filename+'.xml');
+		   close();
+       }
+       body.removeChild(ir);
+     }
+    
+
+	
+	
+}
+
+
+
+</script>
+</head>
+<body>
+
+<form name = "form" method= "get">
+<p>Title<br><input type="text" name="title"></p>
+<p>Start Time<br> <input type="text" name="start"></p>
+<p>End Time<br> <input type="text" name="end"></p>
+
+<p>Day<br> 
+<input type="checkbox" name="mon" value ="mon">Monday
+<input type="checkbox" name="tue" value ="tue">Tuesday
+<input type="checkbox" name="wed" value ="wed">Wednesday<br>
+<input type="checkbox" name="thur" value ="thur">Thursday
+<input type="checkbox" name="fri" value ="fri">Friday
+<input type="checkbox" name="sat" value ="sat">Saturday<br>
+<input type="checkbox" name="sun" value ="sun">Sunday<br>
+</p>
+<p>Recursion<br> 
+
+<input type="radio" name="recur" value = "weekly">Weekly<br>
+<input type="radio" name="recur" value = "fortnight">Fortnightly<br>
+<input type="radio" name="recur" value = "none" checked= true>None<br>
+<input type="submit" value = "Add Event" onClick="testResults(this.form)">
+</form>
+</body>
+</html>

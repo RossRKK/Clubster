@@ -32,7 +32,7 @@ public class ConnectionThread implements Runnable {
 			PrintWriter out;
 			out = new PrintWriter(s.getOutputStream(), true);
 			
-			out.println("start");
+			out.println("go");
 			String input;
 			
 			boolean done = false;
@@ -54,6 +54,7 @@ public class ConnectionThread implements Runnable {
 			}
 			System.out.println("isPupil=" + isPupil);
 			
+			out.println("go");
 			done = false;
 			while (!done) {
 				input = in.nextLine();
@@ -124,6 +125,7 @@ public class ConnectionThread implements Runnable {
 			
 			System.out.println("loop about to start");
 			while (true) {
+				out.println("go");
 				input = in.nextLine();
 				input.trim();
 				input.toLowerCase();

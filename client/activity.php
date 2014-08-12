@@ -56,23 +56,37 @@
 					if ( ($result = socket_connect($socket, $host, $port)) === FALSE ) {
 						echo "socket_connect() failed. Reason: ($result) " . socket_strerror(socket_last_error($socket));
 					} else {
+						$iterator = 0;
 						while ($out = socket_read($socket, 2048)) {
-							if ($out = "start") {
-								socket_write($socket, $data, strlen($data));
-								socket_write($socket, $name . "\n");
-								if ($time_strt != "")
-								socket_write($socket, "time_strt:" . $time_strt . "\n");
-								if ($time_end != "")
-								socket_write($socket, "time_end:" . $time_end . "\n");
-								if ($desc != "")
-								socket_write($socket, "desc:" . $desc . "\n");
-								socket_write($socket, "days:" . $mon . ":" . $tue . ":" . $wed . ":" . $thur . ":" . $fri . ":" . $sat . ":" . $sun . "\n");
+							if ($out = "go") {
+								if ($iterator == 0)
+									socket_write($socket, $data, strlen($data));
+								if ($iterator == 1)
+									socket_write($socket, $name . "\n");
+								if ($time_strt != "") {
+									if ($iterator == 2)
+										socket_write($socket, "time_strt:" . $time_strt . "\n");
+								}
+								if ($time_end != "") {
+									if ($iterator == 3)
+										socket_write($socket, "time_end:" . $time_end . "\n");
+								}
+								if ($desc != "") {
+									if ($iterator == 4)
+										socket_write($socket, "desc:" . $desc . "\n");
+								}
+								if ($iterator == 5)
+									socket_write($socket, "days:" . $mon . ":" . $tue . ":" . $wed . ":" . $thur . ":" . $fri . ":" . $sat . ":" . $sun . "\n");
+								if ($iterator == 6)
 								socket_write($socket, "reqKit:" . $reqKit . "\n");
+								if ($iterator == 7)
 								socket_write($socket, "save" . "\n");
+								if ($iterator == 8)
 								socket_write($socket, "exit");
-								socket_write($socket, "getinfo");
-								echo socket_read($socket, 2048);
+								//socket_write($socket, "getinfo");
+								//echo socket_read($socket, 2048);
 								socket_close($socket);
+								$iterator ++;
 							}
 						}
 					}

@@ -125,7 +125,7 @@ public class Activity {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			String path = Reference.defActLoc + id;
+			String path = Reference.defActLoc + id + ".xml";
 			StreamResult result = new StreamResult(new File(path));
 	 
 			// Output to console for testing

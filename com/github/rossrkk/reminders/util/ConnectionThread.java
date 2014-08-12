@@ -99,7 +99,7 @@ public class ConnectionThread implements Runnable {
 					Activity.activities.add(act);
 				}
 			}
-			
+			/*
 			if (isPupil) {
 				out.println(pup.firstName);
 				out.println(pup.lastName);
@@ -120,7 +120,7 @@ public class ConnectionThread implements Runnable {
 					out.println(act.days[i]);
 				}
 			}
-			
+			*/
 			
 			
 			System.out.println("loop about to start");
@@ -130,6 +130,7 @@ public class ConnectionThread implements Runnable {
 				input.trim();
 				input.toLowerCase();
 				input = input.substring(input.lastIndexOf("\n") + 1);
+				System.out.println(input);
 				if (isPupil) {
 					if(!input.isEmpty())
 					if(input.startsWith("firstname:")) {
@@ -171,46 +172,50 @@ public class ConnectionThread implements Runnable {
 						s.close();
 					}
 				} else {
-					if(!input.isEmpty())
-						if(input.startsWith("name:")) {
-							act.name = input.split(":")[1];
-						} else if(input.startsWith("desc:")) {
-							act.desc = input.split(":")[1];
-							System.out.println("Description: " + act.desc);
-						} else if(input.startsWith("reqkit:")) {
-							act.reqKit = (input.split(":")[1]).equals("true");
-						} else if(input.startsWith("time:")) {
-							act.time = new Time(Integer.parseInt(input.split(":")[1]), Integer.parseInt(input.split(":")[2]), Integer.parseInt(input.split(":")[3]), Integer.parseInt(input.split(":")[4]));
-						} else if(input.startsWith("days:")) {
-							for (int i = 0; i < act.days.length; i ++) {
-								if ((input.split(":")[i] + 1).equals("true")) {
-									act.days[i] = true;
-								} else {
-									act.days[i] = false;
+					try {
+						if(!input.isEmpty())
+							if(input.startsWith("name:")) {
+								act.name = input.split(":")[1];
+							} else if(input.startsWith("desc:")) {
+								act.desc = input.split(":")[1];
+								System.out.println("Description: " + act.desc);
+							} else if(input.startsWith("reqkit:")) {
+								act.reqKit = (input.split(":")[1]).equals("1");
+							} else if(input.startsWith("time:")) {
+								act.time = new Time(Integer.parseInt(input.split(":")[1]), Integer.parseInt(input.split(":")[2]), Integer.parseInt(input.split(":")[3]), Integer.parseInt(input.split(":")[4]));
+							} else if(input.startsWith("days:")) {
+								for (int i = 0; i < act.days.length; i ++) {
+									if ((input.split(":")[i] + 1).equals("1")) {
+										act.days[i] = true;
+									} else {
+										act.days[i] = false;
+									}
 								}
+							} else if(input.startsWith("notify:")) {
+								Notify thread = new Notify(input.split(":")[1], act);
+								Thread t = new Thread(thread);
+								t.start();
+							} else if(input.equals("getinfo")) {
+								out.println(act.name);
+								out.println(act.desc);
+								out.println(act.reqKit);
+								out.println(act.time);
+								
+								for (int i = 0; i < act.days.length; i++) {
+									out.println(act.days[i]);
+								}
+							} else  if (input.equals("save")){
+								act.save();
+								out.println("saved");
+							} else if(input.equals("exit")) {
+								in.close();
+								s.close();
+							} else {
+								
 							}
-						} else if(input.startsWith("notify:")) {
-							Notify thread = new Notify(input.split(":")[1], act);
-							Thread t = new Thread(thread);
-							t.start();
-						} else if(input.equals("getinfo")) {
-							out.println(act.name);
-							out.println(act.desc);
-							out.println(act.reqKit);
-							out.println(act.time);
-							
-							for (int i = 0; i < act.days.length; i++) {
-								out.println(act.days[i]);
-							}
-						} else  if (input.equals("save")){
-							act.save();
-							out.println("saved");
-						} else if(input.equals("exit")) {
-							in.close();
-							s.close();
-						} else {
-							
-						}
+					} catch (ArrayIndexOutOfBoundsException e) {
+						//swallowed
+					}
 				}
 			}
 		

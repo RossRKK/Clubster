@@ -44,7 +44,7 @@
 				$fri = $_POST["fri"] == 'Friday';
 				$sat = $_POST["sat"] == 'Saturday';
 				$sun = $_POST["sun"] == 'Sunday';
-				$reqKit = $_POST["reqKit"];
+				$reqKit = $_POST["reqKit"] == 'reqkit';
 				$host = "127.0.0.1"; 
 				$port = 3000;
 				$data = "activity\n";
@@ -78,14 +78,15 @@
 								if ($iterator == 5)
 									socket_write($socket, "days:" . $mon . ":" . $tue . ":" . $wed . ":" . $thur . ":" . $fri . ":" . $sat . ":" . $sun . "\n");
 								if ($iterator == 6)
-								socket_write($socket, "reqKit:" . $reqKit . "\n");
+									socket_write($socket, "reqKit:" . $reqKit . "\n");
 								if ($iterator == 7)
-								socket_write($socket, "save" . "\n");
-								if ($iterator == 8)
-								socket_write($socket, "exit");
-								//socket_write($socket, "getinfo");
-								//echo socket_read($socket, 2048);
-								socket_close($socket);
+									socket_write($socket, "save" . "\n");
+								if ($iterator == 8) {
+									socket_write($socket, "exit");
+									//socket_write($socket, "getinfo");
+									//echo socket_read($socket, 2048);
+									socket_close($socket);
+								}
 								$iterator ++;
 							}
 						}

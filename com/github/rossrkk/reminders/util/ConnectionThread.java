@@ -39,7 +39,6 @@ public class ConnectionThread implements Runnable {
 			while (!done) {
 				input = in.nextLine();
 				input.trim();
-				input.toLowerCase();
 				System.out.println(input);
 				if (!input.isEmpty())
 				if (input.equals("pupil")) {
@@ -128,7 +127,6 @@ public class ConnectionThread implements Runnable {
 				out.println("go");
 				input = in.nextLine();
 				input.trim();
-				input.toLowerCase();
 				input = input.substring(input.lastIndexOf("\n") + 1);
 				System.out.println(input);
 				if (isPupil) {
@@ -178,14 +176,13 @@ public class ConnectionThread implements Runnable {
 								act.name = input.split(":")[1];
 							} else if(input.startsWith("desc:")) {
 								act.desc = input.split(":")[1];
-								System.out.println("Description: " + act.desc);
 							} else if(input.startsWith("reqkit:")) {
-								act.reqKit = (input.split(":")[1]).equals("1");
+								act.reqKit = (input.split(":")[1]).equals("true");
 							} else if(input.startsWith("time:")) {
 								act.time = new Time(Integer.parseInt(input.split(":")[1]), Integer.parseInt(input.split(":")[2]), Integer.parseInt(input.split(":")[3]), Integer.parseInt(input.split(":")[4]));
 							} else if(input.startsWith("days:")) {
 								for (int i = 0; i < act.days.length; i ++) {
-									if ((input.split(":")[i] + 1).equals("1")) {
+									if ((input.split(":")[i] + 1).equals("true")) {
 										act.days[i] = true;
 									} else {
 										act.days[i] = false;

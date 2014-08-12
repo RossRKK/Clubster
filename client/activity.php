@@ -37,17 +37,42 @@
 				$time_strt = $_POST["time_strt"];
 				$time_end = $_POST["time_end"];
 				$desc = $_POST["desc"];
-				$mon = $_POST["mon"] == 'Monday';
-				$tue = $_POST["tue"] == 'Tuesday';
-				$wed = $_POST["wed"] == 'Wednesday';
-				$thur = $_POST["thur"] == 'Thursday';
-				$fri = $_POST["fri"] == 'Friday';
-				$sat = $_POST["sat"] == 'Saturday';
-				$sun = $_POST["sun"] == 'Sunday';
-				$reqKit = $_POST["reqKit"] == 'reqkit';
+				$mon = $_POST["mon"];
+				$tue = $_POST["tue"];
+				$wed = $_POST["wed"];
+				$thur = $_POST["thur"];
+				$fri = $_POST["fri"];
+				$sat = $_POST["sat"];
+				$sun = $_POST["sun"];
+				$reqKit = $_POST["reqkit"];
 				$host = "127.0.0.1"; 
 				$port = 3000;
 				$data = "activity\n";
+				
+				if ($mon != 'TRUE') {
+					$mon = 'FALSE';
+				}
+				if ($tue != 'TRUE') {
+					$tue = 'FALSE';
+				}
+				if ($wed != 'TRUE') {
+					$wed = 'FALSE';
+				}
+				if ($thur != 'TRUE') {
+					$thur = 'FALSE';
+				}
+				if ($fri != 'TRUE') {
+					$fri = 'FALSE';
+				}
+				if ($sat != 'TRUE') {
+					$sat = 'FALSE';
+				}
+				if ($sun != 'TRUE') {
+					$sun = 'FALSE';
+				}
+				if ($reqKit != 'TRUE') {
+					$reqKit = 'FALSE';
+				}
 
 				if ( ($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === FALSE ) {
 					echo "socket_create() failed: reason: " . socket_strerror(socket_last_error());
@@ -63,13 +88,9 @@
 									socket_write($socket, $data, strlen($data));
 								if ($iterator == 1)
 									socket_write($socket, $name . "\n");
-								if ($time_strt != "") {
+								if ($time_strt != "" && $time_end != "") {
 									if ($iterator == 2)
-										socket_write($socket, "time_strt:" . $time_strt . "\n");
-								}
-								if ($time_end != "") {
-									if ($iterator == 3)
-										socket_write($socket, "time_end:" . $time_end . "\n");
+										socket_write($socket, "time:" . $time_strt . ":" . $time_end . "\n");
 								}
 								if ($desc != "") {
 									if ($iterator == 4)
@@ -78,7 +99,7 @@
 								if ($iterator == 5)
 									socket_write($socket, "days:" . $mon . ":" . $tue . ":" . $wed . ":" . $thur . ":" . $fri . ":" . $sat . ":" . $sun . "\n");
 								if ($iterator == 6)
-									socket_write($socket, "reqKit:" . $reqKit . "\n");
+									socket_write($socket, "reqkit:" . $reqKit . "\n");
 								if ($iterator == 7)
 									socket_write($socket, "save" . "\n");
 								if ($iterator == 8) {
@@ -104,13 +125,13 @@
 			</p>
 			<p>
 			Days Running: <br>
-						<input type="checkbox" name="mon" value="Monday">Monday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tue" value="Tuesday">Tuesday<br>
-						<input type="checkbox" name="wed" value="Wednesday">Wednesday <input type="checkbox" name="thur" value="Thursday">Thursday<br>
-						<input type="checkbox" name="fri" value="Friday">Friday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="sat" value="Saturday">Saturday<br>
-						<input type="checkbox" name="sun" value="Sunday">Sunday<br>
+						<input type="checkbox" name="mon" value="TRUE">Monday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tue" value="TRUE">Tuesday<br>
+						<input type="checkbox" name="wed" value="TRUE">Wednesday <input type="checkbox" name="thur" value="TRUE">Thursday<br>
+						<input type="checkbox" name="fri" value="TRUE">Friday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="sat" value="TRUE">Saturday<br>
+						<input type="checkbox" name="sun" value="TRUE">Sunday<br>
 			</p>
 			<p>
-			<input type="checkbox" name="reqkit" value="reqkit">Kit Required<br>
+			<input type="checkbox" name="reqkit" value="TRUE">Kit Required<br>
 			</p>
 			<input type="submit" value="Submit">
 		</form>

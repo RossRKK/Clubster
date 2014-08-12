@@ -7,7 +7,7 @@ public class Time {
 	public int startMin;
 	public int endMin;
 	
-	public Time(int startMin, int startHr,int endMin, int endHr) {
+	public Time(int startHr, int startMin,int endHr, int endMin) {
 		this.endHr = endHr;
 		this.endMin = endMin;
 		this.startHr = startHr;

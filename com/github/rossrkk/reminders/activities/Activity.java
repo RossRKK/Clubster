@@ -27,11 +27,12 @@ public class Activity {
 	public Time time;
 	public String desc;
 	public boolean reqKit;
+	public String[] week = new String[]{"mon", "tue", "wed", "thur", "fri", "sat", "sun"};
 	
 	public static ArrayList<Activity> activities;
 	
 	public Activity(String ID) throws Exception {
-		String[] week = new String[]{"mon", "tue", "wed", "thur", "fri", "sat", "sun"};
+		
 		days = new boolean[7];
 		id = ID;
 		try {
@@ -99,24 +100,7 @@ public class Activity {
 			
 			//activities elements
 			for (int i = 0; i < days.length; i++) {
-				String day = "";
-				switch (i) {
-				case 0: day = "mon";
-					break;
-				case 1: day = "tue";
-					break;
-				case 2: day = "wed";
-					break;
-				case 3: day = "thur";
-					break;
-				case 4: day = "fri";
-					break;
-				case 5: day = "sat";
-					break;
-				case 6: day = "sun";
-					break;
-				}
-				Element daysE = doc.createElement(day);
+				Element daysE = doc.createElement(week[i]);
 				daysE.appendChild(doc.createTextNode(String.valueOf(days[i])));
 				rootElement.appendChild(daysE);
 			}

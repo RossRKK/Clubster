@@ -32,7 +32,7 @@
 		<?php
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$name = $time_strt = $time_end = $desc = "";
-				$mon = $tue = $wed = $thur = $fri = $sat = $sun = $reqKit = FALSE;
+				$mon = $tue = $wed = $thur = $fri = $sat = $sun = $reqKit = "false";
 				$name = $_POST["name"];
 				$time_strt = $_POST["time_strt"];
 				$time_end = $_POST["time_end"];
@@ -49,29 +49,29 @@
 				$port = 3000;
 				$data = "activity\n";
 				
-				if ($mon != 'TRUE') {
-					$mon = 'FALSE';
+				if ($mon != 'true') {
+					$mon = 'false';
 				}
-				if ($tue != 'TRUE') {
-					$tue = 'FALSE';
+				if ($tue != 'true') {
+					$tue = 'false';
 				}
-				if ($wed != 'TRUE') {
-					$wed = 'FALSE';
+				if ($wed != 'true') {
+					$wed = 'false';
 				}
-				if ($thur != 'TRUE') {
-					$thur = 'FALSE';
+				if ($thur != 'true') {
+					$thur = 'false';
 				}
-				if ($fri != 'TRUE') {
-					$fri = 'FALSE';
+				if ($fri != 'true') {
+					$fri = 'false';
 				}
-				if ($sat != 'TRUE') {
-					$sat = 'FALSE';
+				if ($sat != 'true') {
+					$sat = 'false';
 				}
-				if ($sun != 'TRUE') {
-					$sun = 'FALSE';
+				if ($sun != 'true') {
+					$sun = 'false';
 				}
-				if ($reqKit != 'TRUE') {
-					$reqKit = 'FALSE';
+				if ($reqKit != 'true') {
+					$reqKit = 'false';
 				}
 
 				if ( ($socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) === FALSE ) {
@@ -125,13 +125,13 @@
 			</p>
 			<p>
 			Days Running: <br>
-						<input type="checkbox" name="mon" value="TRUE">Monday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tue" value="TRUE">Tuesday<br>
-						<input type="checkbox" name="wed" value="TRUE">Wednesday <input type="checkbox" name="thur" value="TRUE">Thursday<br>
-						<input type="checkbox" name="fri" value="TRUE">Friday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="sat" value="TRUE">Saturday<br>
-						<input type="checkbox" name="sun" value="TRUE">Sunday<br>
+						<input type="checkbox" name="mon" value="true">Monday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tue" value="true">Tuesday<br>
+						<input type="checkbox" name="wed" value="true">Wednesday <input type="checkbox" name="thur" value="true">Thursday<br>
+						<input type="checkbox" name="fri" value="true">Friday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="sat" value="true">Saturday<br>
+						<input type="checkbox" name="sun" value="true">Sunday<br>
 			</p>
 			<p>
-			<input type="checkbox" name="reqkit" value="TRUE">Kit Required<br>
+			<input type="checkbox" name="reqkit" value="true">Kit Required<br>
 			</p>
 			<input type="submit" value="Submit">
 		</form>

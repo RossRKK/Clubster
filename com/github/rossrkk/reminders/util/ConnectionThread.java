@@ -181,8 +181,8 @@ public class ConnectionThread implements Runnable {
 							} else if(input.startsWith("time:")) {
 								act.time = new Time(Integer.parseInt(input.split(":")[1]), Integer.parseInt(input.split(":")[2]), Integer.parseInt(input.split(":")[3]), Integer.parseInt(input.split(":")[4]));
 							} else if(input.startsWith("days:")) {
-								for (int i = 0; i < act.days.length; i ++) {
-									if ((input.split(":")[i] + 1).equals("true")) {
+								for (int i = 1; i < act.days.length + 1; i ++) {
+									if ((input.split(":")[i]).equals("true")) {
 										act.days[i] = true;
 									} else {
 										act.days[i] = false;

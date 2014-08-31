@@ -117,12 +117,12 @@
 		?>
 		<h1>Add Activity</h1>
 		<form method="POST" name="frm1" action="activity.php">
-			<p>
-			Activity Name: <input type="text" name="name"><br>
-			Start Time: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="time_strt">(Format as "hh:mm")<br>
-			End Time: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="time_end">(Format as "hh:mm")<br>
-			Description: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="desc"><br>
-			</p>
+			<table>
+			<tr><td>Activity Name: </td><td><input type="text" name="name"></td></tr>
+			<tr><td>Start Time: </td><td><input type="text" name="time_strt">(Format as "hh:mm")</td></tr>
+			<tr><td>End Time: </td><td><input type="text" name="time_end">(Format as "hh:mm")</td></tr>
+			<tr><td>Description: </td><td><input type="text" name="desc"></td></tr>
+			</table>
 			<p>
 			Days Running: <br>
 						<input type="checkbox" name="mon" value="true">Monday &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="tue" value="true">Tuesday<br>

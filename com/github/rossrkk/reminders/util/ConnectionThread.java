@@ -58,7 +58,6 @@ public class ConnectionThread implements Runnable {
 			while (!done) {
 				input = in.nextLine();
 				input.trim();
-				input.toLowerCase();
 				if (!input.isEmpty())
 				if (isPupil) {
 					pupName = input;
@@ -70,24 +69,24 @@ public class ConnectionThread implements Runnable {
 			}
 			
 			if (isPupil) {
+				pup = null;
 				for (int i = 0; i < Pupil.pupils.size(); i++) {
 					if (Pupil.pupils.get(i) != null &&
 							(Pupil.pupils.get(i).firstName + " " +
-								Pupil.pupils.get(i).lastName).equals(pupName)) {
+								Pupil.pupils.get(i).lastName).equalsIgnoreCase(pupName)) {
 						pup = Pupil.pupils.get(i);
 						break;
 					}
 				}
 				if (pup == null) {
 					pup = new Pupil(pupName);
-					pup.firstName = actName.split(" ")[0];
-					pup.lastName = actName.split(" ")[1];
 					Pupil.pupils.add(pup);
 				}
 			} else {
+				act = null;
 				for (int i = 0; i < Activity.activities.size(); i++) {
 					if (Activity.activities.get(i) != null &&
-							Activity.activities.get(i).name.equals(actName)) {
+							Activity.activities.get(i).name.equalsIgnoreCase(actName)) {
 						act = Activity.activities.get(i);
 						break;
 					}
@@ -127,7 +126,6 @@ public class ConnectionThread implements Runnable {
 				out.println("go");
 				input = in.nextLine();
 				input.trim();
-				input = input.substring(input.lastIndexOf("\n") + 1);
 				System.out.println(input);
 				if (isPupil) {
 					if(!input.isEmpty())
@@ -147,7 +145,7 @@ public class ConnectionThread implements Runnable {
 						String[] args = input.split(":");
 						if (args[1].equals("add")) {
 							for (int j = 0; j < Activity.activities.size(); j++) {
-								if (Activity.activities.get(j).name.equals(args[2])) {
+								if (Activity.activities.get(j).name.equalsIgnoreCase(args[2])) {
 									pup.activities.add(Activity.activities.get(j));
 								}
 							}

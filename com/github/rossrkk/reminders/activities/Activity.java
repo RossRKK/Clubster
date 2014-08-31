@@ -133,7 +133,7 @@ public class Activity {
 		File[] listOfFiles = folder.listFiles(); 
 		
 		for (int i = 0; i < listOfFiles.length; i++) {
-			activities.add(new Activity(listOfFiles[i].getName()));
+			activities.add(new Activity(listOfFiles[i].getName().substring(0, listOfFiles[i].getName().lastIndexOf("."))));
 		}
 		
 		return activities;

@@ -58,12 +58,6 @@ public class Pupil {
 				}
 			}
 		} catch (FileNotFoundException e){
-			firstName = "";
-			lastName = "";
-			form = "";
-			email = "";
-			sms = "";
-			save();
 		}
 		
 		System.out.println(activities.size());
@@ -109,7 +103,7 @@ public class Pupil {
 			//activities elements
 			for (int i = 0; i < noActs; i++) {
 				Element actE = doc.createElement(activities.get(i).id);
-				actE.appendChild(doc.createTextNode(sms));
+				actE.appendChild(doc.createTextNode(activities.get(i).name));
 				rootElement.appendChild(actE);
 			}
 	 
@@ -117,7 +111,7 @@ public class Pupil {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource source = new DOMSource(doc);
-			String path = Reference.defPupLoc + id;
+			String path = Reference.defPupLoc + id + ".xml";
 			StreamResult result = new StreamResult(new File(path));
 	 
 			// Output to console for testing
@@ -141,7 +135,7 @@ public class Pupil {
 		File[] listOfFiles = folder.listFiles(); 
 		
 		for (int i = 0; i < listOfFiles.length; i++) {
-			pupils.add(new Pupil(listOfFiles[i].getName()));
+			pupils.add(new Pupil(listOfFiles[i].getName().substring(0, listOfFiles[i].getName().lastIndexOf("."))));
 		}
 		
 		return pupils;

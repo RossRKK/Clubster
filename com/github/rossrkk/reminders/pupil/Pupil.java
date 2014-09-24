@@ -37,18 +37,16 @@ public class Pupil {
 	
 	public Pupil(String ID) throws Exception {
 		id = ID;
-		String path = Reference.defPupLoc + id;
+		String path = Reference.defPupLoc + id + ".xml";
 		try {
 			firstName = XMLParser.read(0, "firstname", path);
 			lastName = XMLParser.read(0, "lastname", path);
 			form = XMLParser.read(0, "form", path);
 			email = XMLParser.read(0, "email", path);
 			sms = XMLParser.read(0, "sms", path);
-			
-			noActs = XMLParser.getNoActs(path);
-			System.out.println(noActs);
-			if (noActs > 0)
-			for (int i = 0; i < noActs; i++) {
+		
+			int i = 0;
+			while (XMLParser.read(i, "activity", path) != null) {
 				String act = XMLParser.read(i, "activity", path);
 				
 				for (int j = 0; j < Activity.activities.size(); j++) {
@@ -56,6 +54,7 @@ public class Pupil {
 						activities.add(Activity.activities.get(j));
 					}
 				}
+				i ++;
 			}
 		} catch (FileNotFoundException e){
 		}

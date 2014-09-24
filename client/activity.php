@@ -7,26 +7,6 @@
 				font-family: arial;
 			}
 		</style>
-		<script src= "http://code.jquery.com/jquery-2.1.1.js"></script>
-		<script type="text/javascript">
-			function sendData() {
-				//collect data from form
-				var name = document.forms["frm1"]["name"].value;
-				var time_strt = document.forms["frm1"]["time_strt"].value;
-				var time_end = document.forms["frm1"]["time_end"].value;
-				var desc = document.forms["frm1"]["desc"].value;
-				var days = [];
-					days[0] = document.forms["frm1"]["mon"].checked;
-					days[1] = document.forms["frm1"]["tue"].checked;
-					days[2] = document.forms["frm1"]["wed"].checked;
-					days[3] = document.forms["frm1"]["thur"].checked;
-					days[4] = document.forms["frm1"]["fri"].checked;
-					days[5] = document.forms["frm1"]["sat"].checked;
-					days[6] = document.forms["frm1"]["sun"].checked;
-				var kit = document.forms["frm1"]["reqkit"].checked;
-			}
-		</script>
-		
 	</head>
 	<body>
 		<?php

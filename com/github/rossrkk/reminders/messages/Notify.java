@@ -15,7 +15,9 @@ public class Notify implements Runnable {
 	
 	@Override
 	public void run() {
+		System.out.println("Thread Started");
 		for (int i = 0; i < Pupil.pupils.size(); i ++) {
+			System.out.println(Pupil.pupils.get(i).activities.size());
 			for (int j = 0; j < Pupil.pupils.get(i).activities.size(); j++) {
 				if (Pupil.pupils.get(i).activities.get(j).id.equals(act.id)) {
 					Email.send(act.name, message, Pupil.pupils.get(i).email, "rossrkk", "photosynthesis");

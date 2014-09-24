@@ -36,7 +36,7 @@ public class Activity {
 		days = new boolean[7];
 		id = ID;
 		try {
-			String path = Reference.defActLoc + id;
+			String path = Reference.defActLoc + id + ".xml";
 			name = XMLParser.read(0, "name", path);
 			time = new Time(XMLParser.read(0, "time_strt", path), XMLParser.read(0, "time_end", path));
 			desc = XMLParser.read(0, "desc", path);
